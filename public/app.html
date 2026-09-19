@@ -10,12 +10,13 @@
   <link rel="stylesheet" href="report.css">
   <link rel="stylesheet" href="ai.css">
   <link rel="stylesheet" href="measure.css">
+  <link rel="stylesheet" href="cloud.css">
   <title>Rambutan Lapangan</title>
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><span class="brandmark">R</span><div><strong>Rambutan Lapangan</strong><small>12 pohon · 365 hari</small></div></div>
-    <button class="icon-button" id="settingsBtn" aria-label="Pengaturan">⚙</button>
+    <div class="top-actions"><span id="cloudStatus" class="cloud-status syncing">Menghubungkan…</span><button class="icon-button" id="settingsBtn" aria-label="Pengaturan">⚙</button></div>
   </header>
 
   <main>
@@ -64,6 +65,8 @@
       <button class="primary full report-download" id="downloadReportBtn">Download laporan PDF</button>
       <p class="download-hint">Pada layar berikutnya, pilih <strong>Simpan sebagai PDF</strong>.</p>
       <button class="secondary full" id="exportBtn">Unduh cadangan data</button>
+      <button class="secondary full import-backup" id="importBtn">Pulihkan dari cadangan JSON</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
     </section>
   </main>
 

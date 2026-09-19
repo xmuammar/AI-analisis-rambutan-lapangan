@@ -17,9 +17,11 @@ Aplikasi lapangan berbasis web untuk perencanaan, pemeriksaan, pengendalian, eva
 
 ## Algoritma
 
-Versi saat ini menggunakan **Explainable Hybrid AI Scoring**: sistem berbasis aturan agronomi, pembobotan indikator, normalisasi skor, analisis tren riwayat, dan penghitungan tingkat keyakinan data. Model ini transparan dan belum diklaim sebagai deep learning terlatih.
+Versi saat ini menggunakan **Explainable Hybrid AI Scoring**: sistem berbasis aturan agronomi, pembobotan indikator, normalisasi skor, analisis tren riwayat, dan penghitungan tingkat keyakinan data. Model ini transparan dan belum diklaim sebagai deep learning terlatih. Data pemeriksaan yang terkumpul dapat menjadi dasar pelatihan model machine learning pada tahap selanjutnya.
 
 ## Menjalankan
+
+Buka proyek melalui web server lokal, misalnya:
 
 ```bash
 python3 -m http.server 8080

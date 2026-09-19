@@ -1,0 +1,6 @@
+.top-actions{display:flex;align-items:center;gap:9px}
+.cloud-status{font-size:.68rem;font-weight:800;padding:7px 9px;border-radius:999px;background:#ddefe3;color:#216246;white-space:nowrap}
+.cloud-status.syncing{background:#f7ead8;color:#9a572d}
+.cloud-status.offline{background:#f6dfdd;color:#9a3e39}
+@media(max-width:420px){.cloud-status{max-width:96px;overflow:hidden;text-overflow:ellipsis}}
+.import-backup{margin-top:10px}
