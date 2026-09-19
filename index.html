@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#174c35">
+  <meta name="description" content="Pengendalian dan evaluasi 12 pohon rambutan selama 365 hari">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="report.css">
+  <link rel="stylesheet" href="ai.css">
+  <link rel="stylesheet" href="measure.css">
+  <title>Rambutan Lapangan</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brandmark">R</span><div><strong>Rambutan Lapangan</strong><small>12 pohon · 365 hari</small></div></div>
+    <button class="icon-button" id="settingsBtn" aria-label="Pengaturan">⚙</button>
+  </header>
+
+  <main>
+    <section id="beranda" class="view active" aria-label="Beranda">
+      <article class="today-card">
+        <div class="today-head"><div><span class="eyebrow" id="dateLabel"></span><h1 id="dayTitle">Hari ke-1</h1></div><div class="day-ring"><strong id="progressPct">0%</strong><span>tahun</span></div></div>
+        <div class="phase-pill" id="phaseLabel">Adaptasi</div>
+        <h2 id="todayFocus">Cek air, daun, adaptasi; tanpa NPK.</h2>
+        <p id="todayAdvice">Periksa tanah terlebih dahulu. Siram hanya jika mulai kering.</p>
+        <button class="primary" id="startCheckBtn">Mulai pemeriksaan</button>
+      </article>
+
+      <div class="stats" aria-label="Ringkasan">
+        <article><span class="stat-icon green">✓</span><div><strong id="doneCount">0</strong><small>Pemeriksaan selesai</small></div></article>
+        <article><span class="stat-icon orange">!</span><div><strong id="attentionCount">0</strong><small>Perlu perhatian</small></div></article>
+      </div>
+
+      <div class="section-title"><div><span class="eyebrow">STATUS KEBUN</span><h2>12 pohon rambutan</h2></div><button class="text-button" data-go="pohon">Lihat semua →</button></div>
+      <div id="treePreview" class="tree-strip"></div>
+
+      <article class="next-card"><div class="next-icon">◷</div><div><span class="eyebrow">JADWAL BERIKUTNYA</span><h3 id="nextTitle">Pemeriksaan 3-harian</h3><p id="nextDate"></p></div></article>
+    </section>
+
+    <section id="jadwal" class="view" aria-label="Jadwal">
+      <div class="page-heading"><span class="eyebrow">RENCANA 365 HARI</span><h1>Jadwal perawatan</h1><p>Pilih satu kegiatan untuk melihat atau mengisi hasil pemeriksaan.</p></div>
+      <div class="segmented" role="group"><button class="active" data-filter="semua">Semua</button><button data-filter="belum">Belum</button><button data-filter="selesai">Selesai</button></div>
+      <div id="scheduleList" class="schedule-list"></div>
+    </section>
+
+    <section id="pohon" class="view" aria-label="Pohon">
+      <div class="page-heading"><span class="eyebrow">KELOMPOK A–D</span><h1>Kondisi 12 pohon</h1><p>Ketuk pohon untuk memperbarui status terakhirnya.</p></div>
+      <div id="treeGrid" class="tree-grid"></div>
+    </section>
+
+    <section id="laporan" class="view" aria-label="Laporan">
+      <div class="page-heading"><span class="eyebrow">EVALUASI</span><h1>Kemajuan kebun</h1><p>Ringkasan otomatis dari seluruh catatan lapangan.</p></div>
+      <article class="report-card"><div class="report-score"><div class="big-ring"><strong id="reportPct">0%</strong></div><div><h2>Kepatuhan jadwal</h2><p id="reportSummary">Belum ada pemeriksaan tersimpan.</p></div></div></article>
+      <div class="ai-heading"><div><span class="eyebrow">AI ANALISIS PERKEBUNAN</span><h2>Skor kesehatan setiap pohon</h2></div><span class="ai-badge">Model hibrida</span></div>
+      <article class="ai-summary"><div class="ai-score-ring"><strong id="aiGardenScore">—</strong><span>kebun</span></div><div><h3 id="aiGardenLabel">Menunggu data pemeriksaan</h3><p id="aiGardenAdvice">Isi pemeriksaan setiap pohon agar sistem dapat menghitung skor dan risiko.</p></div></article>
+      <div id="aiTreeGrid" class="ai-tree-grid"></div>
+      <p class="ai-disclaimer">Skor merupakan estimasi pendukung keputusan dari data pemeriksaan, bukan diagnosis pasti. Tingkat keyakinan meningkat ketika data lengkap dan riwayat bertambah.</p>
+      <h2 class="minor-title">Indikator terakhir</h2>
+      <div id="indicatorBars" class="indicator-bars"></div>
+      <h2 class="minor-title">Fase tahunan</h2>
+      <div id="phaseTimeline" class="phase-timeline"></div>
+      <button class="primary full report-download" id="downloadReportBtn">Download laporan PDF</button>
+      <p class="download-hint">Pada layar berikutnya, pilih <strong>Simpan sebagai PDF</strong>.</p>
+      <button class="secondary full" id="exportBtn">Unduh cadangan data</button>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navigasi utama">
+    <button class="active" data-view="beranda"><span>⌂</span>Beranda</button>
+    <button data-view="jadwal"><span>▦</span>Jadwal</button>
+    <button data-view="pohon"><span>♧</span>Pohon</button>
+    <button data-view="laporan"><span>▥</span>Laporan</button>
+  </nav>
+
+  <dialog id="checkDialog" class="sheet">
+    <form method="dialog" id="checkForm">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title"><div><span class="eyebrow" id="checkDay"></span><h2>Pemeriksaan lapangan</h2></div><button value="cancel" class="close" aria-label="Tutup">×</button></div>
+      <label>Pilih pohon<select id="treeSelect"></select></label>
+      <fieldset><legend>Pengukuran untuk model AI <small>(opsional)</small></legend><div class="measure-grid"><label>Tinggi (cm)<input id="heightCm" type="number" min="0" step="1" inputmode="decimal" placeholder="Contoh: 100"></label><label>Lingkar batang (cm)<input id="stemCm" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Contoh: 8,5"></label><label>Kelembapan (%)<input id="moisturePct" type="number" min="0" max="100" step="1" inputmode="decimal" placeholder="Jika ada alat"></label></div></fieldset>
+      <fieldset><legend>Kelembapan tanah</legend><div class="choice-row" data-name="soil"><button type="button" data-value="Kering">Kering</button><button type="button" data-value="Lembap">Lembap</button><button type="button" data-value="Becek">Becek</button></div></fieldset>
+      <fieldset><legend>Kondisi daun</legend><div class="choice-row" data-name="leaf"><button type="button" data-value="Hijau">Hijau</button><button type="button" data-value="Pucat">Pucat</button><button type="button" data-value="Layu">Layu</button></div></fieldset>
+      <fieldset><legend>Tunas baru</legend><div class="choice-row" data-name="shoot"><button type="button" data-value="Ada">Ada</button><button type="button" data-value="Tidak">Tidak</button></div></fieldset>
+      <fieldset><legend>Kondisi bunga</legend><div class="choice-row" data-name="flower"><button type="button" data-value="Tidak ada">Tidak ada</button><button type="button" data-value="Ada">Ada</button><button type="button" data-value="Rontok">Rontok</button><button type="button" data-value="Bertambah">Bertambah</button></div></fieldset>
+      <fieldset><legend>Kondisi buah</legend><div class="choice-row" data-name="fruit"><button type="button" data-value="Tidak ada">Tidak ada</button><button type="button" data-value="Ada">Ada</button><button type="button" data-value="Rontok">Rontok</button><button type="button" data-value="Bertambah">Bertambah</button></div></fieldset>
+      <fieldset><legend>Hama / penyakit</legend><div class="choice-row" data-name="pest"><button type="button" data-value="Tidak ada">Tidak ada</button><button type="button" data-value="Ringan">Ringan</button><button type="button" data-value="Berat">Berat</button></div></fieldset>
+      <fieldset><legend>Gulma</legend><div class="choice-row" data-name="weed"><button type="button" data-value="Bersih">Bersih</button><button type="button" data-value="Ringan">Ringan</button><button type="button" data-value="Padat">Padat</button></div></fieldset>
+      <label>Tindakan dan catatan<textarea id="actionNote" rows="3" placeholder="Contoh: Siram 2 L, bersihkan gulma…"></textarea></label>
+      <button type="submit" class="primary full">Simpan pemeriksaan</button>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="sheet compact"><form method="dialog" id="settingsForm"><div class="sheet-handle"></div><div class="sheet-title"><div><span class="eyebrow">PENGATURAN</span><h2>Awal perawatan</h2></div><button value="cancel" class="close">×</button></div><label>Tanggal tanam kelompok A<input id="startDate" type="date" required></label><p class="hint">Kelompok B, C, dan D otomatis bergeser 5, 10, dan 15 hari. Perubahan tanggal tidak menghapus catatan.</p><button type="submit" class="primary full">Simpan tanggal</button></form></dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
